@@ -1,0 +1,78 @@
+1.Get all the countries from the Asia continent /region using the Filter function
+
+
+        const request = new XMLHttpRequest();
+        request.open("GET", "https://restcountries.com/v3.1/all");
+        request.send();
+        request.onload= function(){
+            var result=JSON.parse(request.response);
+            console.log(result);
+            var countries = result.filter((ele)=>ele.region=="Asia");
+        console.log(countries);
+        }
+
+2.Get all the countries with a population of less than 2 lakhs using Filter function
+
+        const request = new XMLHttpRequest();
+        request.open("GET", "https://restcountries.com/v3.1/all");
+        request.send();
+        request.onload= function(){
+            var result=JSON.parse(request.response);
+            console.log(result);
+            var population = result.filter((ele)=>ele.population<200000);
+            console.log(population);
+        }
+
+
+3.Print the following details name, capital, flag using forEach function
+
+        const request = new XMLHttpRequest();
+        request.open("GET", "https://restcountries.com/v3.1/all");
+        request.send();
+        request.onload= function(){
+            var result=JSON.parse(request.response);
+            console.log(result);
+            var x = result.forEach((element) => {
+                console.log(element.name)
+                console.log(element.flag)
+                console.log(element.capital)
+                });
+        }
+
+4. Print the total population of countries using reduce function
+
+
+        const request = new XMLHttpRequest();
+        request.open("GET", "https://restcountries.com/v3.1/all");
+        request.send();
+        request.onload= function(){
+            var result=JSON.parse(request.response);
+            console.log(result);
+            var x = result.reduce((acc, ele) =>acc+ele.population,0);
+            console.log(x)
+        }
+
+
+5. Print the country which uses US Dollars as currency.
+
+
+        const request = new XMLHttpRequest();
+        request.open("GET", "https://restcountries.com/v3.1/all");
+        request.send();
+        request.onload= function(){
+            var result=JSON.parse(request.response);
+            console.log(result);
+            var x = result.filter((ele) => ele.currencies !== undefined );
+            var y = x.map((ele) => ele.currencies)
+            var z = x.filter((dollar) => {
+                for (let key in dollar.currencies) {
+                if(dollar.currencies[key].name === "United States dollar"){
+            return dollar
+            }
+            }})
+
+            
+            console.log(x)
+            console.log(y)
+            console.log(z)
+        }
